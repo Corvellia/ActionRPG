@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://d2qutnufbmia6"]
 
 [ext_resource type="Texture2D" uid="uid://7tteidbbgatn" path="res://art/SpriteSheet.png" id="1_c8pbk"]
-[ext_resource type="Script" path="res://player/player.cs" id="1_k7la1"]
+[ext_resource type="Script" path="res://player/Player.cs" id="1_tld1q"]
 
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 1
-script = ExtResource("1_k7la1")
+script = ExtResource("1_tld1q")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_c8pbk")
