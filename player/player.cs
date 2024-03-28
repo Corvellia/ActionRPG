@@ -1,5 +1,7 @@
 using Godot;
 
+namespace ActionRPGTutorial.Player;
+
 public partial class Player : CharacterBody2D
 {
 	[Export]
