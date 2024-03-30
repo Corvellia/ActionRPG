@@ -37,30 +37,32 @@ public partial class Player : CharacterBody2D
 
 	public void UpdateAnimation()
 	{
+
+		if (Velocity.Length() == 0)
+		{
+			_animationPlayer.Stop();
+			return;
+		}
+
 		var direction = WalkAnimations.WalkDown;
 
 		switch (Velocity.X)
-        {
-            case < 0:
-                direction = WalkAnimations.WalkLeft;
-                break;
-            case > 0:
-                direction = WalkAnimations.WalkRight;
-                break;
-            default:
-            {
-                if (Velocity.Y < 0)
-                {
-                    direction = WalkAnimations.WalkUp;
-                }
-                else if (Velocity is { X: 0, Y: 0 })
-                {
-                    direction = "RESET";
-                }
-
-                break;
-            }
-        }
+		{
+			case < 0:
+				direction = WalkAnimations.WalkLeft;
+				break;
+			case > 0:
+				direction = WalkAnimations.WalkRight;
+				break;
+			default:
+			{
+				if (Velocity.Y < 0)
+				{
+					direction = WalkAnimations.WalkUp;
+				}
+				break;
+			}
+		}
 		_animationPlayer.Play(direction);
 	}
 }
