@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dr8hqelsntk2x"]
+[gd_scene load_steps=9 format=3 uid="uid://dr8hqelsntk2x"]
 
 [ext_resource type="PackedScene" uid="uid://dpq4fkrk5nwjn" path="res://Player/Player.tscn" id="1_k2m0p"]
 [ext_resource type="Texture2D" uid="uid://gkclpfpvdnyo" path="res://art/TilesetFloor.png" id="2_ynm4s"]
 [ext_resource type="Texture2D" uid="uid://cm6cr6vvd8li5" path="res://art/TilesetNature.png" id="3_av6fn"]
+[ext_resource type="Texture2D" uid="uid://bl6ia0whsq8vf" path="res://art/AnimatedFlower.png" id="4_ogg2t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_csvxk"]
 texture = ExtResource("2_ynm4s")
@@ -851,9 +852,18 @@ texture = ExtResource("3_av6fn")
 10:20/0 = 0
 11:20/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e2hqf"]
+texture = ExtResource("4_ogg2t")
+0:0/animation_frame_0/duration = 0.4
+0:0/animation_frame_1/duration = 0.4
+0:0/animation_frame_2/duration = 0.4
+0:0/animation_frame_3/duration = 0.4
+0:0/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_v5oea"]
 sources/0 = SubResource("TileSetAtlasSource_csvxk")
 sources/1 = SubResource("TileSetAtlasSource_cj1mx")
+sources/3 = SubResource("TileSetAtlasSource_e2hqf")
 
 [node name="World" type="Node2D"]
 
@@ -872,7 +882,7 @@ layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
-layer_1/tile_data = PackedInt32Array(458758, 393217, 11, 262154, 393217, 11, 131080, 393217, 11, 65537, 393217, 11, 393217, 393217, 11, 524300, 196609, 11, 327693, 196609, 11, 196620, 196609, 11, 262147, 196609, 11, 393219, 65537, 11, 10, 65537, 11)
+layer_1/tile_data = PackedInt32Array(524300, 196609, 11, 327693, 196609, 11, 196620, 196609, 11, 262147, 196609, 11, 393219, 65537, 11, 10, 65537, 11, 458759, 3, 0, 327681, 3, 0, 131076, 3, 0, 262154, 3, 0, 65548, 3, 0)
 layer_2/name = "Trees"
 layer_2/enabled = true
 layer_2/modulate = Color(1, 1, 1, 1)
