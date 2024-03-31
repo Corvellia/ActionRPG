@@ -4,4 +4,7 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
 	  <AnalysisLevel>latest-Recommended</AnalysisLevel>
   </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Scenes\" />
+  </ItemGroup>
 </Project>
