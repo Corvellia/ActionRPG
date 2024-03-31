@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dpq4fkrk5nwjn"]
+[gd_scene load_steps=10 format=3 uid="uid://dpq4fkrk5nwjn"]
 
 [ext_resource type="Script" path="res://Player/Player.cs" id="1_04qkb"]
 [ext_resource type="Texture2D" uid="uid://7tteidbbgatn" path="res://art/SpriteSheet.png" id="1_c8pbk"]
@@ -8,7 +8,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/path = NodePath("PlayerSprite:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -26,7 +26,7 @@ step = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/path = NodePath("PlayerSprite:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -44,7 +44,7 @@ step = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/path = NodePath("PlayerSprite:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -62,7 +62,7 @@ step = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/path = NodePath("PlayerSprite:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -80,7 +80,7 @@ step = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/path = NodePath("PlayerSprite:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -99,13 +99,16 @@ _data = {
 "WalkUp": SubResource("Animation_nmkwr")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qn31k"]
+size = Vector2(14, 4)
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_04qkb")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="PlayerSprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_c8pbk")
 offset = Vector2(0, -8)
 hframes = 4
@@ -115,3 +118,7 @@ vframes = 7
 libraries = {
 "": SubResource("AnimationLibrary_pvron")
 }
+
+[node name="PlayerCollisionBox" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_qn31k")
