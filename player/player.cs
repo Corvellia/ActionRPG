@@ -32,6 +32,11 @@ public partial class Player : CharacterBody2D
 	{
 		var moveDirection = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 		Velocity = moveDirection * Speed;
+
+		if (Input.IsActionPressed("Sprint"))
+		{
+			Velocity *= 2;
+		}
 		UpdateAnimation();
 	}
 
