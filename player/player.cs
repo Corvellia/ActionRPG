@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using ActionRPGTutorial.Enums;
 using ActionRPGTutorial.Player.PlayerDataModels;
 using Godot;
+using Array = Godot.Collections.Array;
 
 namespace ActionRPGTutorial.Player;
 
@@ -33,11 +34,14 @@ public partial class Player : CharacterBody2D
 	{
 		var moveDirection = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 		Velocity = moveDirection * Speed;
-
+	
 		if (Input.IsActionPressed(CustomInputMaps.InputMap(CustomInputMapEnum.SPRINT)))
 		{
 			Velocity *= 2;
 		}
+
+		var testData = new Array();
+
 		UpdateAnimation();
 	}
 

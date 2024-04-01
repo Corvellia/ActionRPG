@@ -1,3 +1,4 @@
+using System;
 using ActionRPGTutorial.ExtensionMethods;
 using Godot;
 
@@ -15,6 +16,7 @@ public partial class PlayerCamera : Camera2D
 	{
 		var worldSizePixels = _tileMap.GetWorldSize();
 		LimitRight = worldSizePixels.X;
+		GD.Print($"{worldSizePixels.X.ToString()}");
 		LimitBottom = worldSizePixels.Y;
 	}
 }
