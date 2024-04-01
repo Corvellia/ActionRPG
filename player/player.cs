@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.CompilerServices;
+using ActionRPGTutorial.Enums;
 using ActionRPGTutorial.Player.PlayerDataModels;
 using Godot;
 
@@ -33,7 +34,7 @@ public partial class Player : CharacterBody2D
 		var moveDirection = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 		Velocity = moveDirection * Speed;
 
-		if (Input.IsActionPressed("Sprint"))
+		if (Input.IsActionPressed(CustomInputMaps.InputMap(CustomInputMapEnum.SPRINT)))
 		{
 			Velocity *= 2;
 		}
