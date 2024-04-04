@@ -13,7 +13,7 @@ public partial class Slime : CharacterBody2D
 	public int Speed { get; set; } = 15;
 
 	[Export] 
-	public double Limit = 0.5;
+	public double Limit { get; set; } = 0.5;
 
 	[Export]
 	public Marker2D Marker { get; set; }
