@@ -1,3 +1,4 @@
+using ActionRPGTutorial.GlobalTools;
 using ActionRPGTutorial.Player.PlayerDataModels;
 using Godot;
 
@@ -58,11 +59,7 @@ public partial class Slime : CharacterBody2D
 
 	public void UpdateAnimation()
 	{
-		var direction = WalkAnimations.WalkDown;
-		if (Velocity.Y < 0)
-		{
-			direction = WalkAnimations.WalkUp;
-		}
+		var direction = AnimationTools.GetDirection(Velocity);
 
 		_animatedSprite.Play(direction);
 	}

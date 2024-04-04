@@ -1,4 +1,5 @@
 using ActionRPGTutorial.Enums;
+using ActionRPGTutorial.GlobalTools;
 using ActionRPGTutorial.Player.PlayerDataModels;
 using Godot;
 using Array = Godot.Collections.Array;
@@ -52,25 +53,7 @@ public partial class Player : CharacterBody2D
 			return;
 		}
 
-		var direction = WalkAnimations.WalkDown;
-
-		switch (Velocity.X)
-		{
-			case < 0:
-				direction = WalkAnimations.WalkLeft;
-				break;
-			case > 0:
-				direction = WalkAnimations.WalkRight;
-				break;
-			default:
-			{
-				if (Velocity.Y < 0)
-				{
-					direction = WalkAnimations.WalkUp;
-				}
-				break;
-			}
-		}
+        var direction = AnimationTools.GetDirection(Velocity);
 		_animationPlayer.Play(direction);
 	}
 }
