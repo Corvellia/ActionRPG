@@ -24,8 +24,9 @@ public partial class Slime : CharacterBody2D
 	{
 		_animatedSprite = GetNode<AnimatedSprite2D>("SlimeAnimatedSprite");
 		_startPosition = Position;
-		//_endPosition = _startPosition + new Vector2(0, 3 * 16);
-		_endPosition = Marker.GlobalPosition;
+        //This was used to move 3 tiles down and 3 tiles up rather than moving to a marker position.Keeping for reference
+        //_endPosition = _startPosition + new Vector2(0, 3 * 16);  
+        _endPosition = Marker.GlobalPosition;
 	}
 
 	public override void _PhysicsProcess(double delta)
