@@ -1,6 +1,5 @@
 using ActionRPGTutorial.Enums;
 using ActionRPGTutorial.GlobalTools;
-using ActionRPGTutorial.Player.PlayerDataModels;
 using Godot;
 using Array = Godot.Collections.Array;
 

@@ -1,5 +1,4 @@
 using ActionRPGTutorial.GlobalTools;
-using ActionRPGTutorial.Player.PlayerDataModels;
 using Godot;
 
 namespace ActionRPGTutorial.Enemies;
