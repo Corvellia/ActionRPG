@@ -1,6 +1,7 @@
 using ActionRPGTutorial.Enums;
 using ActionRPGTutorial.GlobalTools;
 using Godot;
+using Godot.Collections;
 using Array = Godot.Collections.Array;
 
 namespace ActionRPGTutorial.Player;
@@ -12,12 +13,15 @@ public partial class Player : CharacterBody2D
 
 	private AnimationPlayer _animationPlayer = new();
 
+	private Area2D _hurtBox;
 	/*
 	 * Overrides
 	 */
 	public override void _Ready()
 	{
 		_animationPlayer = GetNode<AnimationPlayer>("PlayerAnimations");
+		_hurtBox = GetNode<Area2D>("HurtBox");
+		_hurtBox.AreaEntered += (AreaEnteredEventHandler) => OnHurtBoxAreaEntered(_hurtBox.GetOverlappingAreas());
 	}
 	public override void _PhysicsProcess(double delta)
 	{
@@ -64,14 +68,38 @@ public partial class Player : CharacterBody2D
 			var collision = GetSlideCollision(i);
 			var collider = collision.GetCollider();
 			var colliderDict = collider.GetPropertyList();
-			GD.Print(collider.Get("name"));
+			//GD.Print(collider.Get("name"));
 		}
 	}
-	private void _on_hurt_box_area_entered(Area2D area)
+
+	private void OnHurtBoxAreaEntered(Array<Area2D> areas)
 	{
-		if (area.Name == "HitBox")
+		foreach (var area in areas)
 		{
-			GD.Print(area.GetParent().Name);
+			if (area.Name == "HitBox")
+			{
+				GD.Print(area.GetParent().Name);
+			}
 		}
+
+		//if (area.Name == "HitBox")
+		//{
+		//	GD.Print(area.GetParent().Name);
+		//}
 	}
 }
+
+
+//private void _on_hurt_box_area_entered(Area2D area)
+//{
+//	if (area.Name == "HitBox")
+//	{
+//		GD.Print(area.GetParent().Name);
+//	}
+//}
+
+
+//private void OnHurtBoxAreaEntered(Area2D area)
+//{
+//	// Replace with function body.
+//}

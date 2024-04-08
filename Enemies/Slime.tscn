@@ -255,5 +255,3 @@ shape = SubResource("CapsuleShape2D_u1k72")
 libraries = {
 "": SubResource("AnimationLibrary_571pe")
 }
-
-[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
