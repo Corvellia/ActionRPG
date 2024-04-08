@@ -7,7 +7,7 @@ public partial class Slime : CharacterBody2D
 {
 	private Vector2 _startPosition;
 	private Vector2 _endPosition;
-	private AnimatedSprite2D _animatedSprite;
+	private AnimationPlayer _animationPlayer;
 
 	[Export] 
 	public int Speed { get; set; } = 15;
@@ -22,7 +22,7 @@ public partial class Slime : CharacterBody2D
 	 */
 	public override void _Ready()
 	{
-		_animatedSprite = GetNode<AnimatedSprite2D>("SlimeAnimatedSprite");
+		_animationPlayer = GetNode<AnimationPlayer>("SlimeAnimations");
 		_startPosition = Position;
 		//This was used to move 3 tiles down and 3 tiles up rather than moving to a marker position.Keeping for reference
 		//_endPosition = _startPosition + new Vector2(0, 3 * 16);  
@@ -60,7 +60,6 @@ public partial class Slime : CharacterBody2D
 	public void UpdateAnimation()
 	{
 		var direction = AnimationTools.GetDirection(Velocity);
-
-		_animatedSprite.Play(direction);
+		_animationPlayer.Play(direction);
 	}
 }
