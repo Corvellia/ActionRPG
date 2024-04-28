@@ -11,6 +11,10 @@ public partial class Player : CharacterBody2D
 	[Export]
 	public int Speed { get; set; } = 35;
 
+    [Export] 
+    public int MaxHealth { get; set; } = 3;
+    public int CurrentHealth { get; set; }
+
 	private AnimationPlayer _animationPlayer = new();
 
 	private Area2D _hurtBox;
@@ -18,7 +22,8 @@ public partial class Player : CharacterBody2D
 	 * Overrides
 	 */
 	public override void _Ready()
-	{
+    {
+        CurrentHealth = MaxHealth;
 		_animationPlayer = GetNode<AnimationPlayer>("PlayerAnimations");
 		_hurtBox = GetNode<Area2D>("HurtBox");
 		_hurtBox.AreaEntered += (AreaEnteredEventHandler) => OnHurtBoxAreaEntered(_hurtBox.GetOverlappingAreas());
@@ -77,9 +82,10 @@ public partial class Player : CharacterBody2D
 		foreach (var area in areas)
 		{
 			if (area.Name == "HitBox")
-			{
-				GD.Print(area.GetParent().Name);
-			}
+            {
+                DecreaseHealth(1);
+				GD.Print(CurrentHealth);
+            }
 		}
 
 		//if (area.Name == "HitBox")
@@ -87,6 +93,15 @@ public partial class Player : CharacterBody2D
 		//	GD.Print(area.GetParent().Name);
 		//}
 	}
+
+    private void DecreaseHealth(int i)
+    {
+        CurrentHealth -= i;
+        if (CurrentHealth < 0)
+        {
+            CurrentHealth = MaxHealth;
+        }
+    }
 }
 
 
