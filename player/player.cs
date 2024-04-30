@@ -13,6 +13,8 @@ public partial class Player : CharacterBody2D
 
     [Export]
     public int MaxHealth { get; set; } = 3;
+
+    [Export] public int KnockBackPower = 500;
     public int CurrentHealth { get; set; }
 
     private AnimationPlayer _animationPlayer = new();
@@ -91,7 +93,7 @@ public partial class Player : CharacterBody2D
         {
             if (area.Name == "HitBox")
             {
-                DecreaseHealth(1);
+                DecreaseHealth(1, area);
             }
         }
 
@@ -102,7 +104,7 @@ public partial class Player : CharacterBody2D
         //}
     }
 
-    private void DecreaseHealth(int i)
+    private void DecreaseHealth(int i, Area2D area)
     {
         CurrentHealth -= i;
         if (CurrentHealth < 0)
@@ -110,7 +112,18 @@ public partial class Player : CharacterBody2D
             CurrentHealth = MaxHealth;
         }
         _customSignals.EmitSignal(nameof(CustomSignals.HealthChanged), CurrentHealth);
+        CharacterBody2D characterBody = area.GetParent() as CharacterBody2D;
+        if (characterBody != null)
+        {
+            Knockback(characterBody.Velocity);
+        }
+    }
 
+    private void Knockback(Vector2 enemyVelocity)
+    {
+        var knockbackDirection = (enemyVelocity - Velocity).Normalized() * KnockBackPower;
+        Velocity = knockbackDirection;
+        MoveAndSlide();
     }
 }
 

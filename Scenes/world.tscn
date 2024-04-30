@@ -3166,10 +3166,12 @@ layer_2/tile_data = PackedInt32Array(983040, 1376257, 14, 393218, 393217, 8, 983
 
 [node name="Player" parent="TileMap" instance=ExtResource("1_k2m0p")]
 position = Vector2(114, 66)
+KnockBackPower = 1000
 
 [node name="PlayerCamera" type="Camera2D" parent="TileMap/Player" node_paths=PackedStringArray("_tileMap")]
 limit_left = 0
 limit_top = 0
+position_smoothing_enabled = true
 script = ExtResource("5_g05ib")
 _tileMap = NodePath("../..")
 
