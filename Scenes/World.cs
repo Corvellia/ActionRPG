@@ -6,13 +6,14 @@ public partial class World : Node2D
 {
     public HeartsContainer HeartsContainer;
     public Player Player;
+    private CustomSignals _customSignals;
 
     public override void _Ready()
     {
         HeartsContainer = GetNode<HeartsContainer>("CanvasLayer/HeartsContainer");
         Player = GetNode<Player>("TileMap/Player");
+        _customSignals = GetNode<CustomSignals>("/root/CustomSignals");
         HeartsContainer.SetMaxHearts(Player.MaxHealth);
-        HeartsContainer.UpdateHearts(1);
-        Player.Connect(Player.SignalName.HealthChanged, HeartsContainer.UpdateHearts);
+        _customSignals.HealthChanged += HeartsContainer.UpdateHearts;
     }
 }

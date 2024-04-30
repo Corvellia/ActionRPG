@@ -13,13 +13,11 @@ public partial class Player : CharacterBody2D
 
     [Export]
     public int MaxHealth { get; set; } = 3;
-    [Signal]
-    public delegate void HealthChangedEventHandler(int currentHealth);
     public int CurrentHealth { get; set; }
 
     private AnimationPlayer _animationPlayer = new();
-
     private Area2D _hurtBox;
+    private CustomSignals _customSignals;
     /*
 	 * Overrides
 	 */
@@ -28,8 +26,16 @@ public partial class Player : CharacterBody2D
         CurrentHealth = MaxHealth;
         _animationPlayer = GetNode<AnimationPlayer>("PlayerAnimations");
         _hurtBox = GetNode<Area2D>("HurtBox");
+        _customSignals = GetNode<CustomSignals>("/root/CustomSignals"); //root because we set it in autoload
         _hurtBox.AreaEntered += (AreaEnteredEventHandler) => OnHurtBoxAreaEntered(_hurtBox.GetOverlappingAreas());
+        _customSignals.DamagePlayer += HandleDamagePlayer; //Keeping this code as an example of another way to handle incoming damage via signals.
     }
+
+    private void HandleDamagePlayer(int damageamount)
+    {
+        CurrentHealth -= damageamount;
+    }
+
     public override void _PhysicsProcess(double delta)
     {
         HandleInput();
@@ -81,14 +87,11 @@ public partial class Player : CharacterBody2D
 
     private void OnHurtBoxAreaEntered(Array<Area2D> areas)
     {
-        HealthChangedEventHandler womp = HealthChanged1;
-
         foreach (var area in areas)
         {
             if (area.Name == "HitBox")
             {
                 DecreaseHealth(1);
-                womp(CurrentHealth);
             }
         }
 
@@ -99,10 +102,6 @@ public partial class Player : CharacterBody2D
         //}
     }
 
-    public void HealthChanged1(int currentHealth)
-    {
-        EmitSignal(SignalName.HealthChanged, currentHealth);
-    }
     private void DecreaseHealth(int i)
     {
         CurrentHealth -= i;
@@ -110,6 +109,8 @@ public partial class Player : CharacterBody2D
         {
             CurrentHealth = MaxHealth;
         }
+        _customSignals.EmitSignal(nameof(CustomSignals.HealthChanged), CurrentHealth);
+
     }
 }
 
