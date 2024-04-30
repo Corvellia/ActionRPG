@@ -2,6 +2,8 @@ using ActionRPGTutorial.Enums;
 using ActionRPGTutorial.GlobalTools;
 using Godot;
 using Godot.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Array = Godot.Collections.Array;
 
 namespace ActionRPGTutorial.Player;
@@ -22,6 +24,8 @@ public partial class Player : CharacterBody2D
     private Area2D _hurtBox;
     private CustomSignals _customSignals;
     private Timer _timer;
+    private bool _isHurt;
+    private List<Area2D> _enemyCollisions = new();
     /*
 	 * Overrides
 	 */
@@ -34,6 +38,7 @@ public partial class Player : CharacterBody2D
         _hurtBox = GetNode<Area2D>("HurtBox");
         _customSignals = GetNode<CustomSignals>("/root/CustomSignals"); //root because we set it in autoload
         _hurtBox.AreaEntered += (AreaEnteredEventHandler) => OnHurtBoxAreaEntered(_hurtBox.GetOverlappingAreas());
+        _hurtBox.AreaExited += (AreaExitedEventHandler) => OnHurtBoxAreaExited(_hurtBox.GetOverlappingAreas());
         _customSignals.DamagePlayer += HandleDamagePlayer; //Keeping this code as an example of another way to handle incoming damage via signals.
         _timer.Timeout += TimerTimeout;
 
@@ -50,6 +55,14 @@ public partial class Player : CharacterBody2D
         HandleInput();
         MoveAndSlide();
         HandleCollision();
+
+        if (!_isHurt)
+        {
+            foreach (var enemyArea in _enemyCollisions)
+            {
+                DecreaseHealth(1, enemyArea);
+            }
+        }
     }
 
     /*
@@ -100,7 +113,7 @@ public partial class Player : CharacterBody2D
         {
             if (area.Name == "HitBox")
             {
-                DecreaseHealth(1, area);
+                _enemyCollisions.Add(area);
             }
         }
 
@@ -109,6 +122,11 @@ public partial class Player : CharacterBody2D
         //{
         //	GD.Print(area.GetParent().Name);
         //}
+    }
+
+    private void OnHurtBoxAreaExited(Array<Area2D> areas)
+    {
+        _enemyCollisions = areas.ToList();
     }
 
     private async void DecreaseHealth(int i, Area2D area)
@@ -125,12 +143,14 @@ public partial class Player : CharacterBody2D
             Knockback(characterBody.Velocity);
             _effectsAnimation.Play("HurtBlinkAnimation");
             _timer.Start();
+            _isHurt = true;
         }
     }
 
     private void TimerTimeout()
     {
         _effectsAnimation.Play("RESET");
+        _isHurt = false;
         _timer.Stop();
     }
 
