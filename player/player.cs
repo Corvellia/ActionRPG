@@ -17,9 +17,11 @@ public partial class Player : CharacterBody2D
     [Export] public int KnockBackPower = 500;
     public int CurrentHealth { get; set; }
 
+    private AnimationPlayer _effectsAnimation = new();
     private AnimationPlayer _animationPlayer = new();
     private Area2D _hurtBox;
     private CustomSignals _customSignals;
+    private Timer _timer;
     /*
 	 * Overrides
 	 */
@@ -27,10 +29,15 @@ public partial class Player : CharacterBody2D
     {
         CurrentHealth = MaxHealth;
         _animationPlayer = GetNode<AnimationPlayer>("PlayerAnimations");
+        _effectsAnimation = GetNode<AnimationPlayer>("EffectsAnimations");
+        _timer = GetNode<Timer>("PlayerHurtTimer");
         _hurtBox = GetNode<Area2D>("HurtBox");
         _customSignals = GetNode<CustomSignals>("/root/CustomSignals"); //root because we set it in autoload
         _hurtBox.AreaEntered += (AreaEnteredEventHandler) => OnHurtBoxAreaEntered(_hurtBox.GetOverlappingAreas());
         _customSignals.DamagePlayer += HandleDamagePlayer; //Keeping this code as an example of another way to handle incoming damage via signals.
+        _timer.Timeout += TimerTimeout;
+
+        _effectsAnimation.Play("RESET");
     }
 
     private void HandleDamagePlayer(int damageamount)
@@ -104,7 +111,7 @@ public partial class Player : CharacterBody2D
         //}
     }
 
-    private void DecreaseHealth(int i, Area2D area)
+    private async void DecreaseHealth(int i, Area2D area)
     {
         CurrentHealth -= i;
         if (CurrentHealth < 0)
@@ -116,7 +123,15 @@ public partial class Player : CharacterBody2D
         if (characterBody != null)
         {
             Knockback(characterBody.Velocity);
+            _effectsAnimation.Play("HurtBlinkAnimation");
+            _timer.Start();
         }
+    }
+
+    private void TimerTimeout()
+    {
+        _effectsAnimation.Play("RESET");
+        _timer.Stop();
     }
 
     private void Knockback(Vector2 enemyVelocity)

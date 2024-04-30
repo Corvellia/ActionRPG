@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dpq4fkrk5nwjn"]
+[gd_scene load_steps=14 format=3 uid="uid://dpq4fkrk5nwjn"]
 
 [ext_resource type="Script" path="res://Player/Player.cs" id="1_04qkb"]
 [ext_resource type="Texture2D" uid="uid://7tteidbbgatn" path="res://art/SpriteSheet.png" id="1_c8pbk"]
@@ -99,6 +99,45 @@ _data = {
 "WalkUp": SubResource("Animation_nmkwr")
 }
 
+[sub_resource type="Animation" id="Animation_8io6v"]
+resource_name = "HurtBlinkAnimation"
+length = 0.4
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.898039, 0, 0.00784314, 0.615686), Color(0.898039, 0, 0.00784314, 0.615686), Color(1, 1, 1, 0.615686)]
+}
+
+[sub_resource type="Animation" id="Animation_emcsg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.898039, 0, 0.00784314, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_061cu"]
+_data = {
+"HurtBlinkAnimation": SubResource("Animation_8io6v"),
+"RESET": SubResource("Animation_emcsg")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qn31k"]
 size = Vector2(14, 4)
 
@@ -113,14 +152,27 @@ texture_filter = 1
 script = ExtResource("1_04qkb")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
+clip_children = 2
 texture = ExtResource("1_c8pbk")
 offset = Vector2(0, -8)
 hframes = 4
 vframes = 7
 
+[node name="ColorRect" type="ColorRect" parent="PlayerSprite"]
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+offset_bottom = 17.0
+color = Color(0.898039, 0, 0.00784314, 0)
+
 [node name="PlayerAnimations" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_pvron")
+}
+
+[node name="EffectsAnimations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_061cu")
 }
 
 [node name="PlayerCollisionBox" type="CollisionShape2D" parent="."]
@@ -134,3 +186,6 @@ collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CapsuleShape2D_m7p4v")
+
+[node name="PlayerHurtTimer" type="Timer" parent="."]
+one_shot = true
