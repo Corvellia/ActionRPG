@@ -3,7 +3,6 @@ using ActionRPGTutorial.GlobalTools;
 using Godot;
 using Godot.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Array = Godot.Collections.Array;
 
 namespace ActionRPGTutorial.Player;
@@ -40,7 +39,7 @@ public partial class Player : CharacterBody2D
         /*
          * Leaving the hurtbox event handling code here for future reference.  Instead of using event handling here, I instead am calling the _hurtBox.GetOverlappingAreas in the physicsProcess.
          */
-        //_hurtBox.AreaEntered += (AreaEnteredEventHandler) => OnHurtBoxAreaEntered(_hurtBox.GetOverlappingAreas());
+        _hurtBox.AreaEntered += (AreaEnteredEventHandler) => OnHurtBoxAreaEntered(_hurtBox.GetOverlappingAreas());
         //_hurtBox.AreaExited += (AreaExitedEventHandler) => OnHurtBoxAreaExited(_hurtBox.GetOverlappingAreas());
         _customSignals.DamagePlayer += HandleDamagePlayer; //Keeping this code as an example of another way to handle incoming damage via signals.
         _timer.Timeout += TimerTimeout;
@@ -115,13 +114,17 @@ public partial class Player : CharacterBody2D
 
     private void OnHurtBoxAreaEntered(Array<Area2D> areas)
     {
-        //foreach (var area in areas)
-        //{
-        //    if (area.Name == "HitBox")
-        //    {
-        //        _enemyCollisions.Add(area);
-        //    }
-        //}
+        foreach (var area in areas)
+        {
+            //if (area.Name == "HitBox")
+            //{
+            //    _enemyCollisions.Add(area);
+            //}
+            if (area.HasMethod("Collect"))
+            {
+                area.Call("Collect");
+            }
+        }
 
 
         //if (area.Name == "HitBox")

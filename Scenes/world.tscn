@@ -1,11 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://dr8hqelsntk2x"]
+[gd_scene load_steps=16 format=3 uid="uid://dr8hqelsntk2x"]
 
 [ext_resource type="PackedScene" uid="uid://dpq4fkrk5nwjn" path="res://Player/Player.tscn" id="1_k2m0p"]
 [ext_resource type="Script" path="res://Scenes/World.cs" id="1_mo3ah"]
 [ext_resource type="Texture2D" uid="uid://gkclpfpvdnyo" path="res://art/TilesetFloor.png" id="2_ynm4s"]
 [ext_resource type="Texture2D" uid="uid://cm6cr6vvd8li5" path="res://art/TilesetNature.png" id="3_av6fn"]
+[ext_resource type="PackedScene" uid="uid://bq8sr3fyulpem" path="res://Collectibles/Lifepot.tscn" id="4_b2ipd"]
 [ext_resource type="Texture2D" uid="uid://bl6ia0whsq8vf" path="res://art/AnimatedFlower.png" id="4_ogg2t"]
 [ext_resource type="Script" path="res://Player/PlayerCamera.cs" id="5_g05ib"]
+[ext_resource type="PackedScene" uid="uid://dypc5vwmv7sya" path="res://Collectibles/Sword.tscn" id="5_ykb7c"]
 [ext_resource type="PackedScene" uid="uid://bjr622mrk7ea4" path="res://Enemies/Slime.tscn" id="6_l0aef"]
 [ext_resource type="PackedScene" uid="uid://cghl2p87tkkf0" path="res://UI/HeartsContainer.tscn" id="7_8fx26"]
 
@@ -3105,6 +3107,11 @@ texture = ExtResource("3_av6fn")
 21:14/0/physics_layer_0/angular_velocity = 0.0
 21:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-15.25, 8.125, -15, 24.25, 17, 24, 16.75, 7.75)
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_g42gk"]
+resource_name = "Collectibles"
+scenes/1/scene = ExtResource("4_b2ipd")
+scenes/2/scene = ExtResource("5_ykb7c")
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e2hqf"]
 texture = ExtResource("4_ogg2t")
 0:0/animation_frame_0/duration = 0.4
@@ -3138,6 +3145,7 @@ terrain_set_1/terrain_2/color = Color(0.815686, 0.231373, 0.282353, 1)
 sources/0 = SubResource("TileSetAtlasSource_csvxk")
 sources/1 = SubResource("TileSetAtlasSource_cj1mx")
 sources/3 = SubResource("TileSetAtlasSource_e2hqf")
+sources/2 = SubResource("TileSetScenesCollectionSource_g42gk")
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_mo3ah")
@@ -3163,6 +3171,13 @@ layer_2/y_sort_enabled = true
 layer_2/y_sort_origin = 0
 layer_2/z_index = 1
 layer_2/tile_data = PackedInt32Array(983040, 1376257, 14, 393218, 393217, 8, 983044, 1376257, 14, 458757, 393217, 8, 131080, 196609, 18, 458762, 393217, 8, 196619, 393217, 8, 458766, 393217, 0, 983063, 1376257, 14, 983069, 1376257, 14, 30, 1376257, 14, 327710, 1376257, 14)
+layer_3/name = "Collectibles"
+layer_3/enabled = true
+layer_3/modulate = Color(1, 1, 1, 1)
+layer_3/y_sort_enabled = false
+layer_3/y_sort_origin = 0
+layer_3/z_index = 0
+layer_3/tile_data = PackedInt32Array(589830, 2, 65536, 589833, 2, 65536, 720905, 2, 65536, 851979, 2, 65536, 851978, 2, 65536, 720903, 2, 131072)
 
 [node name="Player" parent="TileMap" instance=ExtResource("1_k2m0p")]
 position = Vector2(114, 66)
