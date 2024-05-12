@@ -3206,6 +3206,7 @@ script = ExtResource("5_g05ib")
 _tileMap = NodePath("../..")
 
 [node name="WorldUi" type="CanvasLayer" parent="."]
+process_mode = 3
 script = ExtResource("10_5smhp")
 
 [node name="HeartsContainer" parent="WorldUi" instance=ExtResource("7_8fx26")]
@@ -3227,3 +3228,6 @@ offset_right = 64.5
 offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[connection signal="Closed" from="WorldUi/InventoryUi" to="." method="OnInventoryUiClosed"]
+[connection signal="Opened" from="WorldUi/InventoryUi" to="." method="OnInventoryUiOpened"]

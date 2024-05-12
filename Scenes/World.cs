@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using ActionRPGTutorial.Player;
 
 public partial class World : Node2D
@@ -15,5 +14,17 @@ public partial class World : Node2D
         _customSignals = GetNode<CustomSignals>("/root/CustomSignals");
         HeartsContainer.SetMaxHearts(Player.MaxHealth);
         _customSignals.HealthChanged += HeartsContainer.UpdateHearts;
+        _customSignals.Opened += OnInventoryUiOpened;
+        _customSignals.Closed += OnInventoryUiClosed;
+    }
+
+    public void OnInventoryUiClosed()
+    {
+        GetTree().Paused = false;
+    }
+
+    public void OnInventoryUiOpened()
+    {
+        GetTree().Paused = true;
     }
 }

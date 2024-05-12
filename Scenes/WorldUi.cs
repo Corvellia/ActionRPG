@@ -12,7 +12,7 @@ public partial class WorldUi : CanvasLayer
             throw new ArgumentException("Could not load InventoryGui");
         }
 
-        InventoryGui.Call("Close");
+        InventoryGui.Close();
     }
 
     public override void _Input(InputEvent @event)
@@ -21,11 +21,11 @@ public partial class WorldUi : CanvasLayer
         {
             if (InventoryGui.IsOpen)
             {
-                InventoryGui.Call("Close");
+                InventoryGui.Close();
             }
             else
             {
-                InventoryGui.Call("Open");
+                InventoryGui.Open();
             }
         }
     }
