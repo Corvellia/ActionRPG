@@ -37,8 +37,11 @@ public partial class Player : CharacterBody2D
         _timer = GetNode<Timer>("PlayerHurtTimer");
         _hurtBox = GetNode<Area2D>("HurtBox");
         _customSignals = GetNode<CustomSignals>("/root/CustomSignals"); //root because we set it in autoload
-        _hurtBox.AreaEntered += (AreaEnteredEventHandler) => OnHurtBoxAreaEntered(_hurtBox.GetOverlappingAreas());
-        _hurtBox.AreaExited += (AreaExitedEventHandler) => OnHurtBoxAreaExited(_hurtBox.GetOverlappingAreas());
+        /*
+         * Leaving the hurtbox event handling code here for future reference.  Instead of using event handling here, I instead am calling the _hurtBox.GetOverlappingAreas in the physicsProcess.
+         */
+        //_hurtBox.AreaEntered += (AreaEnteredEventHandler) => OnHurtBoxAreaEntered(_hurtBox.GetOverlappingAreas());
+        //_hurtBox.AreaExited += (AreaExitedEventHandler) => OnHurtBoxAreaExited(_hurtBox.GetOverlappingAreas());
         _customSignals.DamagePlayer += HandleDamagePlayer; //Keeping this code as an example of another way to handle incoming damage via signals.
         _timer.Timeout += TimerTimeout;
 
@@ -58,9 +61,12 @@ public partial class Player : CharacterBody2D
 
         if (!_isHurt)
         {
-            foreach (var enemyArea in _enemyCollisions)
+            foreach (var area in _hurtBox.GetOverlappingAreas())
             {
-                DecreaseHealth(1, enemyArea);
+                if (area.Name == "HitBox")
+                {
+                    DecreaseHealth(1, area);
+                }
             }
         }
     }
@@ -109,13 +115,13 @@ public partial class Player : CharacterBody2D
 
     private void OnHurtBoxAreaEntered(Array<Area2D> areas)
     {
-        foreach (var area in areas)
-        {
-            if (area.Name == "HitBox")
-            {
-                _enemyCollisions.Add(area);
-            }
-        }
+        //foreach (var area in areas)
+        //{
+        //    if (area.Name == "HitBox")
+        //    {
+        //        _enemyCollisions.Add(area);
+        //    }
+        //}
 
 
         //if (area.Name == "HitBox")
@@ -126,7 +132,7 @@ public partial class Player : CharacterBody2D
 
     private void OnHurtBoxAreaExited(Array<Area2D> areas)
     {
-        _enemyCollisions = areas.ToList();
+        //_enemyCollisions = areas.ToList();
     }
 
     private async void DecreaseHealth(int i, Area2D area)
