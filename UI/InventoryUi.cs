@@ -1,10 +1,9 @@
 using Godot;
-using System;
 
 public partial class InventoryUi : Control
 {
     [Signal]
-    public delegate void OpenedEventHandler(); 
+    public delegate void OpenedEventHandler();
     [Signal]
     public delegate void ClosedEventHandler();
     public bool IsOpen;

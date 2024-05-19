@@ -1,5 +1,5 @@
-using System.Linq;
 using Godot;
+using System.Linq;
 
 public partial class HeartsContainer : HBoxContainer
 {
@@ -8,7 +8,7 @@ public partial class HeartsContainer : HBoxContainer
     {
         HeartContainer = (PackedScene)ResourceLoader.Load("res://UI/HeartPanel.tscn");
     }
-    
+
     public void SetMaxHearts(int max)
     {
         for (int i = 0; i < max; i++)

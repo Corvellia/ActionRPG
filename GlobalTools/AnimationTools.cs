@@ -18,13 +18,13 @@ namespace ActionRPGTutorial.GlobalTools
                     direction = WalkAnimations.WalkRight;
                     break;
                 default:
-                {
-                    if (velocity.Y < 0)
                     {
-                        direction = WalkAnimations.WalkUp;
+                        if (velocity.Y < 0)
+                        {
+                            direction = WalkAnimations.WalkUp;
+                        }
+                        break;
                     }
-                    break;
-                }
             }
 
             return direction;
