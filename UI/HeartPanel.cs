@@ -1,15 +1,17 @@
 using Godot;
 
+namespace ActionRPGTutorial.UI;
+
 public partial class HeartPanel : Panel
 {
-    public Sprite2D HeartSprite;
+    private Sprite2D _heartSprite;
 
     public override void _Ready()
     {
-        HeartSprite = GetNode<Sprite2D>("HeartSprite");
+        _heartSprite = GetNode<Sprite2D>("HeartSprite");
     }
     public void Update(bool isWhole)
     {
-        HeartSprite.Frame = isWhole ? 0 : 4;
+        _heartSprite.Frame = isWhole ? 0 : 4;
     }
 }

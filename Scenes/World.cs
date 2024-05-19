@@ -1,19 +1,20 @@
-using ActionRPGTutorial.Player;
 using Godot;
+
+namespace ActionRPGTutorial.Scenes;
 
 public partial class World : Node2D
 {
-    public HeartsContainer HeartsContainer;
-    public Player Player;
+    private UI.HeartsContainer _heartsContainer;
+    private Player.Player _player;
     private CustomSignals _customSignals;
 
     public override void _Ready()
     {
-        HeartsContainer = GetNode<HeartsContainer>("WorldUi/HeartsContainer");
-        Player = GetNode<Player>("TileMap/Player");
+        _heartsContainer = GetNode<UI.HeartsContainer>("WorldUi/HeartsContainer");
+        _player = GetNode<Player.Player>("TileMap/Player");
         _customSignals = GetNode<CustomSignals>("/root/CustomSignals");
-        HeartsContainer.SetMaxHearts(Player.MaxHealth);
-        _customSignals.HealthChanged += HeartsContainer.UpdateHearts;
+        _heartsContainer.SetMaxHearts(_player.MaxHealth);
+        _customSignals.HealthChanged += _heartsContainer.UpdateHearts;
         _customSignals.Opened += OnInventoryUiOpened;
         _customSignals.Closed += OnInventoryUiClosed;
     }

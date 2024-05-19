@@ -3183,7 +3183,7 @@ layer_3/tile_data = PackedInt32Array(589830, 2, 65536, 589833, 2, 65536, 720905,
 
 [node name="Player" parent="TileMap" instance=ExtResource("1_k2m0p")]
 position = Vector2(114, 66)
-KnockBackPower = 1000
+_knockBackPower = 1000
 
 [node name="PlayerCamera" type="Camera2D" parent="TileMap/Player" node_paths=PackedStringArray("_tileMap")]
 limit_left = 0

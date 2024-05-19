@@ -1,12 +1,11 @@
-using ActionRPGTutorial;
 using Godot;
+
+namespace ActionRPGTutorial.Collectibles;
 
 public partial class Sword : Collectible
 {
-    public AnimationPlayer PickupAnimation = new();
+    private AnimationPlayer PickupAnimation = new();
 
-    private Test testing;
-    private delegate void Test();
     public override void _Ready()
     {
         PickupAnimation = GetNode<AnimationPlayer>("PickupAnimation");

@@ -15,7 +15,8 @@ public partial class Player : CharacterBody2D
     [Export]
     public int MaxHealth { get; set; } = 3;
 
-    [Export] public int KnockBackPower = 500;
+    [Export] 
+    private int _knockBackPower = 500;
     public int CurrentHealth { get; set; }
 
     private AnimationPlayer _effectsAnimation = new();
@@ -112,7 +113,7 @@ public partial class Player : CharacterBody2D
         }
     }
 
-    private void OnHurtBoxAreaEntered(Array<Area2D> areas)
+    private static void OnHurtBoxAreaEntered(Array<Area2D> areas)
     {
         foreach (var area in areas)
         {
@@ -133,12 +134,12 @@ public partial class Player : CharacterBody2D
         //}
     }
 
-    private void OnHurtBoxAreaExited(Array<Area2D> areas)
+    private static void OnHurtBoxAreaExited(Array<Area2D> areas)
     {
         //_enemyCollisions = areas.ToList();
     }
 
-    private async void DecreaseHealth(int i, Area2D area)
+    private void DecreaseHealth(int i, Area2D area)
     {
         CurrentHealth -= i;
         if (CurrentHealth < 0)
@@ -165,7 +166,7 @@ public partial class Player : CharacterBody2D
 
     private void Knockback(Vector2 enemyVelocity)
     {
-        var knockbackDirection = (enemyVelocity - Velocity).Normalized() * KnockBackPower;
+        var knockbackDirection = (enemyVelocity - Velocity).Normalized() * _knockBackPower;
         Velocity = knockbackDirection;
         MoveAndSlide();
     }

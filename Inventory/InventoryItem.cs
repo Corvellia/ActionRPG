@@ -1,10 +1,11 @@
 using Godot;
 
+namespace ActionRPGTutorial.Inventory;
+
 public partial class InventoryItem : Resource
 {
-    [Export]
-    public string Name = "";
-
-    [Export]
-    private Texture2D Texture;
+    [Export] 
+    private string _name = "";
+    [Export] 
+    private Texture2D _texture;
 }
