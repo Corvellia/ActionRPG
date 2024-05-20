@@ -6,10 +6,13 @@ namespace ActionRPGTutorial;
 public partial class Collectible : Area2D
 {
     [Export]
-    public InventoryItem ItemResource { get; set; }
+    public InventoryItem? ItemResource { get; set; }
     public virtual void Collect(Inventory.Inventory? inventory)
     {
-        inventory?.Insert(ItemResource);
+        if (ItemResource != null)
+        {
+            inventory?.Insert(ItemResource);
+        }
         QueueFree();
     }
 }

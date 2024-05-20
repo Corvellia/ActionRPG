@@ -1,3 +1,4 @@
+using System.Linq;
 using Godot;
 using Godot.Collections;
 
@@ -10,20 +11,31 @@ public partial class Inventory : Resource
     public delegate void InventoryUpdatedEventHandler();
 
     [Export]
-    public Array<InventoryItem> InventoryItems { get; set; } = new();
+    public Array<InventorySlotResource> InventorySlots { get; set; } = new();
 
     public void Insert(InventoryItem item)
     {
-        for (int i = 0; i < InventoryItems.Count; i++)
+        foreach (var slot in InventorySlots)
         {
-            if (InventoryItems[i] is null)
+            if (slot.InventoryItem == item)
             {
-                InventoryItems[i] = item;
-                break;
+                slot.ItemAmount += 1;
+                EmitSignal(nameof(InventoryUpdated));
+                return;
             }
         }
 
-        EmitSignal(nameof(InventoryUpdated));
+        foreach (var slot in InventorySlots)
+        {
+            if (slot.InventoryItem is null)
+            {
+                slot.InventoryItem = item;
+                slot.ItemAmount = 1;
+                EmitSignal(nameof(InventoryUpdated));
+                return;
+            }
+        }
+
     }
 
 

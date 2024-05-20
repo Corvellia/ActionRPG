@@ -1,14 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkjtydxxoce56"]
+[gd_scene load_steps=4 format=3 uid="uid://dkjtydxxoce56"]
 
-[ext_resource type="Script" path="res://UI/InventorySlot.cs" id="1_3fcbg"]
 [ext_resource type="Texture2D" uid="uid://becdmtkqfjl5b" path="res://art/inventorySlot.png" id="1_dj1r6"]
+[ext_resource type="Script" path="res://UI/InventorySlotUI.cs" id="1_vec8w"]
+[ext_resource type="FontFile" uid="uid://dc3utfu0y6ad1" path="res://art/NormalFont.ttf" id="3_yearj"]
 
 [node name="InventorySlot" type="Panel"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(20, 20)
 offset_right = 20.0
 offset_bottom = 20.0
-script = ExtResource("1_3fcbg")
+script = ExtResource("1_vec8w")
 
 [node name="InventorySlotSprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_dj1r6")
@@ -25,3 +26,16 @@ offset_bottom = 20.0
 layout_mode = 2
 
 [node name="Item" type="Sprite2D" parent="CenterContainer/Panel"]
+
+[node name="AmountLabel" type="Label" parent="CenterContainer/Panel"]
+custom_minimum_size = Vector2(11, 14)
+layout_mode = 0
+offset_left = -2.0
+offset_top = -1.0
+offset_right = 9.0
+offset_bottom = 13.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_yearj")
+theme_override_font_sizes/font_size = 8
+text = "1"
+horizontal_alignment = 2

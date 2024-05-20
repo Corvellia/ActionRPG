@@ -1,9 +1,68 @@
-[gd_resource type="Resource" script_class="Inventory" load_steps=4 format=3 uid="uid://bd0u55aauddex"]
+[gd_resource type="Resource" script_class="Inventory" load_steps=18 format=3 uid="uid://bd0u55aauddex"]
 
-[ext_resource type="Resource" uid="uid://ynf76wbft68h" path="res://Inventory/Items/Sword.tres" id="1_634ws"]
-[ext_resource type="Resource" uid="uid://b2jyrf8itvlbi" path="res://Inventory/Items/Lifepot.tres" id="2_elm5p"]
+[ext_resource type="Script" path="res://Inventory/InventorySlotResource.cs" id="1_f6owq"]
 [ext_resource type="Script" path="res://Inventory/Inventory.cs" id="3_ytyn6"]
+
+[sub_resource type="Resource" id="Resource_jed8c"]
+script = ExtResource("1_f6owq")
+ItemAmount = 0
+
+[sub_resource type="Resource" id="Resource_lp1vw"]
+script = ExtResource("1_f6owq")
+ItemAmount = 0
+
+[sub_resource type="Resource" id="Resource_t506y"]
+script = ExtResource("1_f6owq")
+ItemAmount = 0
+
+[sub_resource type="Resource" id="Resource_17rqu"]
+script = ExtResource("1_f6owq")
+ItemAmount = 0
+
+[sub_resource type="Resource" id="Resource_0sc8y"]
+script = ExtResource("1_f6owq")
+ItemAmount = 0
+
+[sub_resource type="Resource" id="Resource_vytla"]
+script = ExtResource("1_f6owq")
+ItemAmount = 0
+
+[sub_resource type="Resource" id="Resource_a33ow"]
+script = ExtResource("1_f6owq")
+ItemAmount = 0
+
+[sub_resource type="Resource" id="Resource_i0u3p"]
+script = ExtResource("1_f6owq")
+ItemAmount = 0
+
+[sub_resource type="Resource" id="Resource_rn2o3"]
+script = ExtResource("1_f6owq")
+ItemAmount = 0
+
+[sub_resource type="Resource" id="Resource_gb0wt"]
+script = ExtResource("1_f6owq")
+ItemAmount = 0
+
+[sub_resource type="Resource" id="Resource_jlr0o"]
+script = ExtResource("1_f6owq")
+ItemAmount = 0
+
+[sub_resource type="Resource" id="Resource_u5bj8"]
+script = ExtResource("1_f6owq")
+ItemAmount = 0
+
+[sub_resource type="Resource" id="Resource_vyv3s"]
+script = ExtResource("1_f6owq")
+ItemAmount = 0
+
+[sub_resource type="Resource" id="Resource_7bgmx"]
+script = ExtResource("1_f6owq")
+ItemAmount = 0
+
+[sub_resource type="Resource" id="Resource_4nxdi"]
+script = ExtResource("1_f6owq")
+ItemAmount = 0
 
 [resource]
 script = ExtResource("3_ytyn6")
-InventoryItems = [ExtResource("1_634ws"), ExtResource("2_elm5p"), ExtResource("2_elm5p"), null, null, null, null, null, null, null, null, null, null, null, null]
+InventorySlots = [SubResource("Resource_jed8c"), SubResource("Resource_lp1vw"), SubResource("Resource_t506y"), SubResource("Resource_17rqu"), SubResource("Resource_0sc8y"), SubResource("Resource_vytla"), SubResource("Resource_a33ow"), SubResource("Resource_i0u3p"), SubResource("Resource_rn2o3"), SubResource("Resource_gb0wt"), SubResource("Resource_jlr0o"), SubResource("Resource_u5bj8"), SubResource("Resource_vyv3s"), SubResource("Resource_7bgmx"), SubResource("Resource_4nxdi")]

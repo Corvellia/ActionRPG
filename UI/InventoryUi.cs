@@ -29,15 +29,15 @@ public partial class InventoryUi : Control
     {
         var indexRange = _slots.Count;
 
-        if (_inventory?.InventoryItems.Count < _slots.Count)
+        if (_inventory?.InventorySlots.Count < _slots.Count)
         {
-            indexRange = _inventory.InventoryItems.Count;
+            indexRange = _inventory.InventorySlots.Count;
         }
 
         for (int i = 0; i < indexRange; i++)
         {
-            InventorySlot? thisSlot = _slots[i] as InventorySlot;
-            thisSlot?.Update(_inventory?.InventoryItems[i]);
+            InventorySlotUI? thisSlot = _slots[i] as InventorySlotUI;
+            thisSlot?.Update(_inventory?.InventorySlots[i]);
         }
     }
 

@@ -191,5 +191,3 @@ shape = SubResource("CapsuleShape2D_m7p4v")
 
 [node name="PlayerHurtTimer" type="Timer" parent="."]
 one_shot = true
-
-[connection signal="area_exited" from="HurtBox" to="." method="OnHurtBoxAreaExited"]
