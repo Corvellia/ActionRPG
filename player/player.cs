@@ -25,7 +25,7 @@ public partial class Player : CharacterBody2D
     private AnimationPlayer _effectsAnimation = new();
     private AnimationPlayer _animationPlayer = new();
     private Area2D? _hurtBox;
-    private CustomSignals? _customSignals;
+    private GlobalTools.Signals.CustomSignals? _customSignals;
     private Timer? _timer;
     private bool _isHurt;
     private List<Area2D> _enemyCollisions = new();
@@ -39,7 +39,7 @@ public partial class Player : CharacterBody2D
         _effectsAnimation = GetNode<AnimationPlayer>("EffectsAnimations");
         _timer = GetNode<Timer>("PlayerHurtTimer");
         _hurtBox = GetNode<Area2D>("HurtBox");
-        _customSignals = GetNode<CustomSignals>("/root/CustomSignals"); //root because we set it in autoload
+        _customSignals = GetNode<GlobalTools.Signals.CustomSignals>("/root/CustomSignals"); //root because we set it in autoload
         /*
          * Leaving the hurtbox event handling code here for future reference.  Instead of using event handling here, I instead am calling the _hurtBox.GetOverlappingAreas in the physicsProcess.
          */
@@ -131,7 +131,10 @@ public partial class Player : CharacterBody2D
             //}
             if (area.HasMethod("Collect"))
             {
-                area.Call("Collect", Inventory);
+                if (Inventory != null)
+                {
+                    area.Call("Collect", Inventory);
+                }
             }
         }
 
@@ -154,7 +157,7 @@ public partial class Player : CharacterBody2D
         {
             CurrentHealth = MaxHealth;
         }
-        _customSignals?.EmitSignal(nameof(CustomSignals.HealthChanged), CurrentHealth);
+        _customSignals?.EmitSignal(nameof(GlobalTools.Signals.CustomSignals.HealthChanged), CurrentHealth);
         if (area.GetParent() is CharacterBody2D characterBody)
         {
             Knockback(characterBody.Velocity);

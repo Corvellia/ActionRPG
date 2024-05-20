@@ -6,13 +6,13 @@ public partial class World : Node2D
 {
     private UI.HeartsContainer? _heartsContainer;
     private Player.Player? _player;
-    private CustomSignals? _customSignals;
+    private GlobalTools.Signals.CustomSignals? _customSignals;
 
     public override void _Ready()
     {
         _heartsContainer = GetNode<UI.HeartsContainer>("WorldUi/HeartsContainer");
         _player = GetNode<Player.Player>("TileMap/Player");
-        _customSignals = GetNode<CustomSignals>("/root/CustomSignals");
+        _customSignals = GetNode<GlobalTools.Signals.CustomSignals>("/root/CustomSignals");
         _heartsContainer.SetMaxHearts(_player.MaxHealth);
         _customSignals.HealthChanged += _heartsContainer.UpdateHearts;
         _customSignals.Opened += OnInventoryUiOpened;

@@ -1,5 +1,7 @@
 using Godot;
 
+namespace ActionRPGTutorial.GlobalTools.Signals;
+
 public partial class CustomSignals : Node
 {
     [Signal]

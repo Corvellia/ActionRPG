@@ -12,11 +12,11 @@ public partial class InventoryUi : Control
     [Export]
     private Inventory.Inventory? _inventory;
     public bool IsOpen { get; set; }
-    private CustomSignals? _customSignals;
+    private GlobalTools.Signals.CustomSignals? _customSignals;
     private Array<Node> _slots = new();
     public override void _Ready()
     {
-        _customSignals = GetNode<CustomSignals>("/root/CustomSignals"); //root because we set it in autoload
+        _customSignals = GetNode<GlobalTools.Signals.CustomSignals>("/root/CustomSignals"); //root because we set it in autoload
         _slots = GetNode<GridContainer>("NinePatchRect/GridContainer").GetChildren();
         if (_inventory != null)
         {
