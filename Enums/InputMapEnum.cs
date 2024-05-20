@@ -9,6 +9,7 @@ namespace ActionRPGTutorial.Enums
             return customInputMap switch
             {
                 CustomInputMapEnum.SPRINT => "Sprint",
+                CustomInputMapEnum.ATTACK => "Attack",
                 _ => throw new ArgumentException("Could not find value in InputMapEnum")
             };
         }
@@ -16,6 +17,7 @@ namespace ActionRPGTutorial.Enums
 
     public enum CustomInputMapEnum
     {
-        SPRINT
+        SPRINT,
+        ATTACK
     }
 }

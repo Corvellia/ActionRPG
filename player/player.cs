@@ -1,9 +1,9 @@
 using ActionRPGTutorial.Enums;
 using ActionRPGTutorial.GlobalTools;
+using ActionRPGTutorial.Inventory;
 using Godot;
 using Godot.Collections;
 using System.Collections.Generic;
-using Array = Godot.Collections.Array;
 
 namespace ActionRPGTutorial.Player;
 
@@ -29,6 +29,10 @@ public partial class Player : CharacterBody2D
     private Timer? _timer;
     private bool _isHurt;
     private List<Area2D> _enemyCollisions = new();
+    private string? _lastAnimationDirection { get; set; } = "down";
+    private Node2D _weaponNode { get; set; }
+
+    private bool _isAttacking { get; set; } = false;
     /*
 	 * Overrides
 	 */
@@ -36,10 +40,12 @@ public partial class Player : CharacterBody2D
     {
         CurrentHealth = MaxHealth;
         _animationPlayer = GetNode<AnimationPlayer>("PlayerAnimations");
+        _animationPlayer.AnimationFinished += (AnimationFinishedEventHandler) => OnAttackAnimationFinishedEventHandler();
         _effectsAnimation = GetNode<AnimationPlayer>("EffectsAnimations");
         _timer = GetNode<Timer>("PlayerHurtTimer");
         _hurtBox = GetNode<Area2D>("HurtBox");
         _customSignals = GetNode<GlobalTools.Signals.CustomSignals>("/root/CustomSignals"); //root because we set it in autoload
+        _weaponNode = GetNode<Node2D>("Weapon");
         /*
          * Leaving the hurtbox event handling code here for future reference.  Instead of using event handling here, I instead am calling the _hurtBox.GetOverlappingAreas in the physicsProcess.
          */
@@ -49,6 +55,12 @@ public partial class Player : CharacterBody2D
         _timer.Timeout += TimerTimeout;
 
         _effectsAnimation.Play("RESET");
+    }
+
+    private void OnAttackAnimationFinishedEventHandler()
+    {
+        _isAttacking = false;
+        _weaponNode.Visible = false;
     }
 
     private void HandleDamagePlayer(int damageamount)
@@ -92,13 +104,23 @@ public partial class Player : CharacterBody2D
             Velocity *= 2;
         }
 
-        var testData = new Array();
+        if (Input.IsActionPressed(CustomInputMaps.InputMap(CustomInputMapEnum.ATTACK)))
+        {
+            GD.Print(_lastAnimationDirection);
+            _isAttacking = true;
+            _weaponNode.Visible = true;
+            _animationPlayer.Play($"{_lastAnimationDirection}");
+        }
 
         UpdateAnimation();
     }
 
     public void UpdateAnimation()
     {
+        if (_isAttacking)
+        {
+            return;
+        }
 
         if (Velocity.Length() == 0 && _animationPlayer.IsPlaying())
         {
@@ -107,6 +129,7 @@ public partial class Player : CharacterBody2D
         }
 
         var direction = AnimationTools.GetDirection(Velocity);
+        _lastAnimationDirection = AnimationTools.CurrentAttackAnimation;
         _animationPlayer.Play(direction);
     }
 
