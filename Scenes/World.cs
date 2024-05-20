@@ -4,9 +4,9 @@ namespace ActionRPGTutorial.Scenes;
 
 public partial class World : Node2D
 {
-    private UI.HeartsContainer _heartsContainer;
-    private Player.Player _player;
-    private CustomSignals _customSignals;
+    private UI.HeartsContainer? _heartsContainer;
+    private Player.Player? _player;
+    private CustomSignals? _customSignals;
 
     public override void _Ready()
     {

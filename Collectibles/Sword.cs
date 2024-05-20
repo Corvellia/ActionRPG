@@ -9,16 +9,16 @@ public partial class Sword : Collectible
     public override void _Ready()
     {
         PickupAnimation = GetNode<AnimationPlayer>("PickupAnimation");
-        PickupAnimation.AnimationFinished += (AnimationFinishedEventHandler) => OnPickupAnimationAnimationFinished();
     }
 
-    public new void Collect()
+    public new void Collect(Inventory.Inventory inventory)
     {
         PickupAnimation.Play("Spin");
+        PickupAnimation.AnimationFinished += (AnimationFinishedEventHandler) => OnPickupAnimationAnimationFinished(inventory);
     }
 
-    public void OnPickupAnimationAnimationFinished()
+    public void OnPickupAnimationAnimationFinished(Inventory.Inventory inventory)
     {
-        base.Collect();
+        base.Collect(inventory);
     }
 }

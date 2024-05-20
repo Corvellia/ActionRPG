@@ -5,7 +5,7 @@ namespace ActionRPGTutorial.UI;
 
 public partial class HeartsContainer : HBoxContainer
 {
-    private PackedScene _heartContainer;
+    private PackedScene? _heartContainer;
     public override void _Ready()
     {
         _heartContainer = (PackedScene)ResourceLoader.Load("res://UI/HeartPanel.tscn");
@@ -15,7 +15,7 @@ public partial class HeartsContainer : HBoxContainer
     {
         for (int i = 0; i < max; i++)
         {
-            var heart = _heartContainer.Instantiate();
+            var heart = _heartContainer?.Instantiate();
             AddChild(heart);
         }
     }

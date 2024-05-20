@@ -7,7 +7,7 @@ public partial class Slime : CharacterBody2D
 {
     private Vector2 _startPosition;
     private Vector2 _endPosition;
-    private AnimationPlayer _animationPlayer;
+    private AnimationPlayer? _animationPlayer;
 
     [Export]
     public int Speed { get; set; } = 15;
@@ -16,7 +16,7 @@ public partial class Slime : CharacterBody2D
     public double Limit { get; set; } = 0.5;
 
     [Export]
-    public Marker2D Marker { get; set; }
+    public Marker2D? Marker { get; set; }
     /*
 	 * Overrides
 	 */
@@ -26,7 +26,10 @@ public partial class Slime : CharacterBody2D
         _startPosition = Position;
         //This was used to move 3 tiles down and 3 tiles up rather than moving to a marker position.Keeping for reference
         //_endPosition = _startPosition + new Vector2(0, 3 * 16);  
-        _endPosition = Marker.GlobalPosition;
+        if (Marker != null)
+        {
+            _endPosition = Marker.GlobalPosition;
+        }
     }
 
     public override void _PhysicsProcess(double delta)
@@ -60,6 +63,6 @@ public partial class Slime : CharacterBody2D
     public void UpdateAnimation()
     {
         var direction = AnimationTools.GetDirection(Velocity);
-        _animationPlayer.Play(direction);
+        _animationPlayer?.Play(direction);
     }
 }

@@ -5,8 +5,8 @@ namespace ActionRPGTutorial.UI;
 
 public partial class InventorySlot : Panel
 {
-    private Sprite2D _backgroundSprite;
-    private Sprite2D _item;
+    private Sprite2D? _backgroundSprite;
+    private Sprite2D? _item;
     public override void _Ready()
     {
         _backgroundSprite = GetNode<Sprite2D>("InventorySlotSprite");
@@ -17,14 +17,28 @@ public partial class InventorySlot : Panel
     {
         if (item is null)
         {
-            _backgroundSprite.Frame = 0;
-            _item.Visible = false;
+            if (_backgroundSprite != null)
+            {
+                _backgroundSprite.Frame = 0;
+            }
+
+            if (_item != null)
+            {
+                _item.Visible = false;
+            }
         }
         else
         {
-            _backgroundSprite.Frame = 1;
-            _item.Visible = true;
-            _item.Texture = item.Texture;
+            if (_backgroundSprite != null)
+            {
+                _backgroundSprite.Frame = 1;
+            }
+
+            if (_item != null)
+            {
+                _item.Visible = true;
+                _item.Texture = item.Texture;
+            }
         }
     }
 }

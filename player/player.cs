@@ -19,14 +19,14 @@ public partial class Player : CharacterBody2D
     private int _knockBackPower = 500;
 
     [Export] 
-    private Inventory.Inventory _inventory;
+    private Inventory.Inventory? _inventory;
     public int CurrentHealth { get; set; }
 
     private AnimationPlayer _effectsAnimation = new();
     private AnimationPlayer _animationPlayer = new();
-    private Area2D _hurtBox;
-    private CustomSignals _customSignals;
-    private Timer _timer;
+    private Area2D? _hurtBox;
+    private CustomSignals? _customSignals;
+    private Timer? _timer;
     private bool _isHurt;
     private List<Area2D> _enemyCollisions = new();
     /*
@@ -64,6 +64,11 @@ public partial class Player : CharacterBody2D
 
         if (!_isHurt)
         {
+            if (_hurtBox == null)
+            {
+                return;
+            }
+
             foreach (var area in _hurtBox.GetOverlappingAreas())
             {
                 if (area.Name == "HitBox")
@@ -149,13 +154,12 @@ public partial class Player : CharacterBody2D
         {
             CurrentHealth = MaxHealth;
         }
-        _customSignals.EmitSignal(nameof(CustomSignals.HealthChanged), CurrentHealth);
-        CharacterBody2D characterBody = area.GetParent() as CharacterBody2D;
-        if (characterBody != null)
+        _customSignals?.EmitSignal(nameof(CustomSignals.HealthChanged), CurrentHealth);
+        if (area.GetParent() is CharacterBody2D characterBody)
         {
             Knockback(characterBody.Velocity);
             _effectsAnimation.Play("HurtBlinkAnimation");
-            _timer.Start();
+            _timer?.Start();
             _isHurt = true;
         }
     }
@@ -164,7 +168,7 @@ public partial class Player : CharacterBody2D
     {
         _effectsAnimation.Play("RESET");
         _isHurt = false;
-        _timer.Stop();
+        _timer?.Stop();
     }
 
     private void Knockback(Vector2 enemyVelocity)

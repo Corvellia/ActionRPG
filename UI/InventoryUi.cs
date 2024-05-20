@@ -11,10 +11,10 @@ public partial class InventoryUi : Control
     [Signal]
     public delegate void ClosedEventHandler();
     [Export]
-    private Inventory.Inventory _inventory;
+    private Inventory.Inventory? _inventory;
     public bool IsOpen { get; set; }
-    private CustomSignals _customSignals;
-    private Array<Node> _slots;
+    private CustomSignals? _customSignals;
+    private Array<Node> _slots = new();
     public override void _Ready()
     {
         _customSignals = GetNode<CustomSignals>("/root/CustomSignals"); //root because we set it in autoload
@@ -26,7 +26,7 @@ public partial class InventoryUi : Control
     {
         var indexRange = _slots.Count;
 
-        if (_inventory.InventoryItems.Count < _slots.Count)
+        if (_inventory?.InventoryItems.Count < _slots.Count)
         {
             indexRange = _inventory.InventoryItems.Count;
         }
@@ -34,7 +34,7 @@ public partial class InventoryUi : Control
         for (int i = 0; i < indexRange; i++)
         {
             InventorySlot? thisSlot = _slots[i] as InventorySlot;
-            thisSlot?.Update(_inventory.InventoryItems[i]);
+            thisSlot?.Update(_inventory?.InventoryItems[i]);
         }
     }
 
@@ -42,13 +42,13 @@ public partial class InventoryUi : Control
     {
         Visible = true;
         IsOpen = true;
-        _customSignals.EmitSignal(SignalName.Opened);
+        _customSignals?.EmitSignal(SignalName.Opened);
     }
 
     public void Close()
     {
         Visible = false;
         IsOpen = false;
-        _customSignals.EmitSignal(SignalName.Closed);
+        _customSignals?.EmitSignal(SignalName.Closed);
     }
 }
