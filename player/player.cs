@@ -19,7 +19,7 @@ public partial class Player : CharacterBody2D
     private int _knockBackPower = 500;
 
     [Export] 
-    private Inventory.Inventory? _inventory;
+    public Inventory.Inventory? Inventory { get; set; }
     public int CurrentHealth { get; set; }
 
     private AnimationPlayer _effectsAnimation = new();
@@ -121,7 +121,7 @@ public partial class Player : CharacterBody2D
         }
     }
 
-    private static void OnHurtBoxAreaEntered(Array<Area2D> areas)
+    private void OnHurtBoxAreaEntered(Array<Area2D> areas)
     {
         foreach (var area in areas)
         {
@@ -131,7 +131,7 @@ public partial class Player : CharacterBody2D
             //}
             if (area.HasMethod("Collect"))
             {
-                area.Call("Collect");
+                area.Call("Collect", Inventory);
             }
         }
 

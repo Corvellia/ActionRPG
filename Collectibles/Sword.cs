@@ -17,7 +17,7 @@ public partial class Sword : Collectible
         PickupAnimation.AnimationFinished += (AnimationFinishedEventHandler) => OnPickupAnimationAnimationFinished(inventory);
     }
 
-    public void OnPickupAnimationAnimationFinished(Inventory.Inventory inventory)
+    public void OnPickupAnimationAnimationFinished(Inventory.Inventory? inventory)
     {
         base.Collect(inventory);
     }

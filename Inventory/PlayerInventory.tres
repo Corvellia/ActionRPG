@@ -6,4 +6,4 @@
 
 [resource]
 script = ExtResource("3_ytyn6")
-InventoryItems = [ExtResource("1_634ws"), ExtResource("2_elm5p"), ExtResource("2_elm5p"), null, null, ExtResource("1_634ws"), null, ExtResource("2_elm5p"), null]
+InventoryItems = [ExtResource("1_634ws"), ExtResource("2_elm5p"), ExtResource("2_elm5p"), null, null, null, null, null, null, null, null, null, null, null, null]

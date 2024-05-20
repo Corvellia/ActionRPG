@@ -13,4 +13,7 @@ public partial class CustomSignals : Node
 
     [Signal]
     public delegate void ClosedEventHandler();
+
+    [Signal]
+    public delegate void InventoryUpdatedEventHandler();
 }

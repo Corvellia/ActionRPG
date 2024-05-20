@@ -151,7 +151,7 @@ z_index = 1
 y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_04qkb")
-_inventory = ExtResource("2_8jwhb")
+Inventory = ExtResource("2_8jwhb")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 clip_children = 2

@@ -1,4 +1,3 @@
-using System.Linq;
 using Godot;
 using Godot.Collections;
 
@@ -19,6 +18,10 @@ public partial class InventoryUi : Control
     {
         _customSignals = GetNode<CustomSignals>("/root/CustomSignals"); //root because we set it in autoload
         _slots = GetNode<GridContainer>("NinePatchRect/GridContainer").GetChildren();
+        if (_inventory != null)
+        {
+            _inventory.InventoryUpdated += Update;
+        }
         Update();
     }
 
