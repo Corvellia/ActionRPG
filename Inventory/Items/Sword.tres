@@ -7,3 +7,4 @@
 script = ExtResource("2_ni1vd")
 _name = "Sword"
 Texture = ExtResource("1_fsfas")
+MaximumItemStackAmount = 1

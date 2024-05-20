@@ -9,4 +9,6 @@ public partial class InventoryItem : Resource
     private string _name = "";
     [Export] 
     public Texture2D? Texture { get; set; }
+    [Export] 
+    public int MaximumItemStackAmount { get; set; }
 }

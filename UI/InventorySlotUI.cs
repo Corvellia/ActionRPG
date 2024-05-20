@@ -45,7 +45,7 @@ public partial class InventorySlotUI : Panel
             {
                 _item.Visible = true;
                 _item.Texture = inventorySlot.InventoryItem.Texture;
-                if (AmountLabel != null)
+                if (AmountLabel != null && inventorySlot.ItemAmount > 1)
                 {
                     AmountLabel.Visible = true;
                     AmountLabel.Text = inventorySlot.ItemAmount.ToString(CultureInfo.InvariantCulture);

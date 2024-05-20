@@ -7,3 +7,4 @@
 script = ExtResource("2_xj7d6")
 _name = "Lifepot"
 Texture = ExtResource("1_fd4k2")
+MaximumItemStackAmount = 3

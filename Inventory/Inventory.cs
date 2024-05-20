@@ -17,7 +17,7 @@ public partial class Inventory : Resource
     {
         foreach (var slot in InventorySlots)
         {
-            if (slot.InventoryItem == item)
+            if (slot.InventoryItem == item && slot.ItemAmount < slot.InventoryItem.MaximumItemStackAmount)
             {
                 slot.ItemAmount += 1;
                 EmitSignal(nameof(InventoryUpdated));
