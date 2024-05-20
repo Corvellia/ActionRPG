@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://dpq4fkrk5nwjn"]
+[gd_scene load_steps=15 format=3 uid="uid://dpq4fkrk5nwjn"]
 
 [ext_resource type="Script" path="res://Player/Player.cs" id="1_04qkb"]
 [ext_resource type="Texture2D" uid="uid://7tteidbbgatn" path="res://art/SpriteSheet.png" id="1_c8pbk"]
+[ext_resource type="Resource" uid="uid://bd0u55aauddex" path="res://Inventory/PlayerInventory.tres" id="2_8jwhb"]
 
 [sub_resource type="Animation" id="Animation_lf87a"]
 length = 0.001
@@ -150,6 +151,7 @@ z_index = 1
 y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_04qkb")
+_inventory = ExtResource("2_8jwhb")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 clip_children = 2

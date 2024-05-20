@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://ynf76wbft68h"]
+
+[ext_resource type="Texture2D" uid="uid://cfen1y2qoiifg" path="res://art/BigSword.png" id="1_fsfas"]
+[ext_resource type="Script" path="res://Inventory/InventoryItem.cs" id="2_ni1vd"]
+
+[resource]
+script = ExtResource("2_ni1vd")
+_name = "Sword"
+Texture = ExtResource("1_fsfas")

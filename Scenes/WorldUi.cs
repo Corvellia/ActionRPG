@@ -1,12 +1,16 @@
-using Godot;
 using System;
+using ActionRPGTutorial.UI;
+using Godot;
+
+namespace ActionRPGTutorial.Scenes;
 
 public partial class WorldUi : CanvasLayer
 {
-    public InventoryUi InventoryGui = new();
+    public InventoryUi InventoryGui { get; set; } = new();
+
     public override void _Ready()
     {
-        InventoryGui = GetNode<InventoryUi>("InventoryUi");
+        InventoryGui = GetNode<ActionRPGTutorial.UI.InventoryUi>("InventoryUi");
         if (InventoryGui is null)
         {
             throw new ArgumentException("Could not load InventoryGui");

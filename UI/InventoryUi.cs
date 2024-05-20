@@ -1,4 +1,8 @@
+using System.Linq;
 using Godot;
+using Godot.Collections;
+
+namespace ActionRPGTutorial.UI;
 
 public partial class InventoryUi : Control
 {
@@ -6,12 +10,32 @@ public partial class InventoryUi : Control
     public delegate void OpenedEventHandler();
     [Signal]
     public delegate void ClosedEventHandler();
-    public bool IsOpen;
+    [Export]
+    private Inventory.Inventory _inventory;
+    public bool IsOpen { get; set; }
     private CustomSignals _customSignals;
-
+    private Array<Node> _slots;
     public override void _Ready()
     {
         _customSignals = GetNode<CustomSignals>("/root/CustomSignals"); //root because we set it in autoload
+        _slots = GetNode<GridContainer>("NinePatchRect/GridContainer").GetChildren();
+        Update();
+    }
+
+    public void Update()
+    {
+        var indexRange = _slots.Count;
+
+        if (_inventory.InventoryItems.Count < _slots.Count)
+        {
+            indexRange = _inventory.InventoryItems.Count;
+        }
+
+        for (int i = 0; i < indexRange; i++)
+        {
+            InventorySlot? thisSlot = _slots[i] as InventorySlot;
+            thisSlot?.Update(_inventory.InventoryItems[i]);
+        }
     }
 
     public void Open()

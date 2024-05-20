@@ -17,6 +17,9 @@ public partial class Player : CharacterBody2D
 
     [Export] 
     private int _knockBackPower = 500;
+
+    [Export] 
+    private Inventory.Inventory _inventory;
     public int CurrentHealth { get; set; }
 
     private AnimationPlayer _effectsAnimation = new();

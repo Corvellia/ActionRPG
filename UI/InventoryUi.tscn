@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dpidn3bjvavhn"]
+[gd_scene load_steps=5 format=3 uid="uid://dpidn3bjvavhn"]
 
 [ext_resource type="Script" path="res://UI/InventoryUi.cs" id="1_75po0"]
 [ext_resource type="Texture2D" uid="uid://vxv2sxu4m0nn" path="res://art/InventoryRect.png" id="1_c408b"]
+[ext_resource type="Resource" uid="uid://bd0u55aauddex" path="res://Inventory/PlayerInventory.tres" id="2_gdcn3"]
 [ext_resource type="PackedScene" uid="uid://dkjtydxxoce56" path="res://UI/InventorySlot.tscn" id="2_vh7bs"]
 
 [node name="InventoryGui" type="Control"]
@@ -11,6 +12,7 @@ anchors_preset = 0
 offset_right = 129.0
 offset_bottom = 80.0
 script = ExtResource("1_75po0")
+_inventory = ExtResource("2_gdcn3")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 0
