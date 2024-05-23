@@ -3205,32 +3205,6 @@ limit_top = 0
 script = ExtResource("5_g05ib")
 _tileMap = NodePath("../..")
 
-[node name="Slime2" parent="TileMap" node_paths=PackedStringArray("Marker") instance=ExtResource("6_l0aef")]
-position = Vector2(280, 72)
-Marker = NodePath("../Slime/SlimeMarker")
-
-[node name="SlimeMarker" type="Marker2D" parent="TileMap/Slime2"]
-position = Vector2(-48, -48)
-
-[node name="SlimeCamera" type="Camera2D" parent="TileMap/Slime2" node_paths=PackedStringArray("_tileMap")]
-limit_left = 0
-limit_top = 0
-script = ExtResource("5_g05ib")
-_tileMap = NodePath("../..")
-
-[node name="Slime3" parent="TileMap" node_paths=PackedStringArray("Marker") instance=ExtResource("6_l0aef")]
-position = Vector2(320, 64)
-Marker = NodePath("../Slime/SlimeMarker")
-
-[node name="SlimeMarker" type="Marker2D" parent="TileMap/Slime3"]
-position = Vector2(48, 0)
-
-[node name="SlimeCamera" type="Camera2D" parent="TileMap/Slime3" node_paths=PackedStringArray("_tileMap")]
-limit_left = 0
-limit_top = 0
-script = ExtResource("5_g05ib")
-_tileMap = NodePath("../..")
-
 [node name="WorldUi" type="CanvasLayer" parent="."]
 process_mode = 3
 visible = false

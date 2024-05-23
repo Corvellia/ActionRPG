@@ -51,6 +51,7 @@ public partial class Slime : CharacterBody2D
         {
             return;
         }
+        GD.Print(_hitBox?.Monitoring);
         UpdateVelocity();
         MoveAndSlide();
         UpdateAnimation();
@@ -83,18 +84,19 @@ public partial class Slime : CharacterBody2D
         _animationPlayer?.Play(direction);
     }
 
-    private void OnHurtBoxAreaEntered(Area2D area)
+    private async void OnHurtBoxAreaEntered(Area2D area)
     {
+        _hitBox?.SetDeferred(Godot.Area2D.PropertyName.Monitorable, false);
+        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
         if (area == _hitBox)
         {
             return;
         }
         _animationPlayer?.Play("Death");
         _isDead = true;
-        _hitBox?.SetDeferred(Godot.Area2D.PropertyName.Monitorable, false);
         if (_animationPlayer != null)
         {
-            _animationPlayer.AnimationFinished +=  (AnimationFinishedEventHandler) => DeathAnimationFinished();
+            _animationPlayer.AnimationFinished += (AnimationFinishedEventHandler) => DeathAnimationFinished();
         }
     }
 
