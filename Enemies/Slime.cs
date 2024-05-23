@@ -51,7 +51,6 @@ public partial class Slime : CharacterBody2D
         {
             return;
         }
-        GD.Print(_hitBox?.Monitoring);
         UpdateVelocity();
         MoveAndSlide();
         UpdateAnimation();

@@ -62,6 +62,7 @@ public partial class Player : CharacterBody2D
     {
         _isAttacking = false;
         _weaponNode.Call("Disable");
+        _animationPlayer.Stop();
     }
 
     private void HandleDamagePlayer(int damageamount)
@@ -73,6 +74,7 @@ public partial class Player : CharacterBody2D
     {
         HandleInput();
         MoveAndSlide();
+        UpdateAnimation();
         HandleCollision();
 
         if (!_isHurt)
@@ -98,6 +100,7 @@ public partial class Player : CharacterBody2D
     public void HandleInput()
     {
         var moveDirection = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
+        GD.Print(Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down"));
         Velocity = moveDirection * Speed;
 
         if (Input.IsActionPressed(CustomInputMaps.InputMap(CustomInputMapEnum.SPRINT)))
@@ -105,7 +108,7 @@ public partial class Player : CharacterBody2D
             Velocity *= 2;
         }
 
-        if (Input.IsActionPressed(CustomInputMaps.InputMap(CustomInputMapEnum.ATTACK)))
+        if (Input.IsActionJustPressed(CustomInputMaps.InputMap(CustomInputMapEnum.ATTACK)))
         {
             //GD.Print(_lastAnimationDirection);
             _isAttacking = true;
@@ -113,7 +116,6 @@ public partial class Player : CharacterBody2D
             _animationPlayer.Play($"{_lastAnimationDirection}");
         }
 
-        UpdateAnimation();
     }
 
     public void UpdateAnimation()
@@ -123,9 +125,12 @@ public partial class Player : CharacterBody2D
             return;
         }
 
-        if (Velocity.Length() == 0 && _animationPlayer.IsPlaying())
+        if (Velocity.Length() == 0)
         {
-            _animationPlayer.Stop();
+            if (_animationPlayer.IsPlaying())
+            {
+                _animationPlayer.Stop();
+            }
             return;
         }
 
