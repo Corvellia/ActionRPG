@@ -46,6 +46,7 @@ public partial class Player : CharacterBody2D
         _hurtBox = GetNode<Area2D>("HurtBox");
         _customSignals = GetNode<GlobalTools.Signals.CustomSignals>("/root/CustomSignals"); //root because we set it in autoload
         _weaponNode = GetNode<Node2D>("Weapon");
+        _weaponNode.Call("Disable");
         /*
          * Leaving the hurtbox event handling code here for future reference.  Instead of using event handling here, I instead am calling the _hurtBox.GetOverlappingAreas in the physicsProcess.
          */
@@ -60,7 +61,7 @@ public partial class Player : CharacterBody2D
     private void OnAttackAnimationFinishedEventHandler()
     {
         _isAttacking = false;
-        _weaponNode.Visible = false;
+        _weaponNode.Call("Disable");
     }
 
     private void HandleDamagePlayer(int damageamount)
@@ -106,9 +107,9 @@ public partial class Player : CharacterBody2D
 
         if (Input.IsActionPressed(CustomInputMaps.InputMap(CustomInputMapEnum.ATTACK)))
         {
-            GD.Print(_lastAnimationDirection);
+            //GD.Print(_lastAnimationDirection);
             _isAttacking = true;
-            _weaponNode.Visible = true;
+            _weaponNode.Call("Enable");
             _animationPlayer.Play($"{_lastAnimationDirection}");
         }
 

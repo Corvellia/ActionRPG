@@ -1,11 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://n82itltpmhex"]
+[gd_scene load_steps=4 format=3 uid="uid://n82itltpmhex"]
 
 [ext_resource type="Texture2D" uid="uid://cfen1y2qoiifg" path="res://art/BigSword.png" id="1_aufbp"]
+[ext_resource type="Script" path="res://Player/AttackSword.cs" id="1_s6bby"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dcgig"]
 size = Vector2(4, 11)
 
 [node name="AttackSword" type="Area2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_s6bby")
 
 [node name="AttackSwordSprite" type="Sprite2D" parent="."]
 position = Vector2(0, -6)
